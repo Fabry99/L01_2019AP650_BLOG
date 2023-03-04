@@ -7,9 +7,9 @@ using System.Threading.Tasks.Dataflow;
 
 namespace L01_2019AP650.Models
 {
-    public class entidades : DbContext
+    public class entidadesContext : DbContext
     {
-        public entidades(DbContextOptions<entidades> options) : base (options) 
+        public entidadesContext(DbContextOptions<entidadesContext> options) : base (options) 
         {
             
 

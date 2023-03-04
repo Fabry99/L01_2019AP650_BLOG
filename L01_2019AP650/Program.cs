@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<entidades>(Options =>
+builder.Services.AddDbContext<entidadesContext>(Options =>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDBConnection")));
 
 builder.Services.AddControllers();
