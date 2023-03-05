@@ -98,10 +98,59 @@ namespace L01_2019AP650.Controllers
                 return Ok(usuario);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(ex.Message); 
+                return BadRequest(ex.Message);
             }
         }
+
+        //actualizar usuarios por Id
+        [HttpPut]
+        [Route("actualizar/{id}")]
+
+        public IActionResult actualizarusuario(int id, [FromBody] usuarios modificarusuario)
+        {
+            usuarios? usuarioActual = (from e in _entidades.usuarios
+                                      where e.usuarioId == id
+                                      select e).FirstOrDefault();
+
+            if (usuarioActual == null)
+            {
+                return NotFound();
+            }
+            usuarioActual.rolId = modificarusuario.rolId;
+            usuarioActual.nombreUsuario = modificarusuario.nombreUsuario;
+            usuarioActual.clave = modificarusuario.clave;
+            usuarioActual.nombre = modificarusuario.nombre;
+            usuarioActual.apellido = modificarusuario.apellido;
+
+            _entidades.Entry(usuarioActual).State = EntityState.Modified;
+            _entidades.SaveChanges();
+
+            return Ok(modificarusuario);
+
+
+        }
+
+        [HttpDelete]
+        [Route("eliminar/{id}")]
+
+        public IActionResult EliminarEquipo(int id)
+        {
+
+            usuarios? usuario = (from e in _entidades.usuarios
+                               where e.usuarioId == id
+                               select e).FirstOrDefault();
+
+            if (usuario == null)
+                return NotFound();
+
+            _entidades.usuarios.Attach(usuario);
+            _entidades.usuarios.Remove(usuario);
+            _entidades.SaveChanges();
+
+            return Ok(usuario);
+        }
+
     }
 }

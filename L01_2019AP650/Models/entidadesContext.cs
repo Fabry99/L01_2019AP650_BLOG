@@ -15,5 +15,9 @@ namespace L01_2019AP650.Models
 
         }
         public DbSet<usuarios> usuarios { get; set; }   
+
+        public DbSet<publicaciones> publicaciones { get; set; }
+
+        public DbSet<Comentarios> comentarios { get; set; }
     }
 }
